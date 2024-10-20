@@ -1,0 +1,168 @@
+
+/* CSS FOR THE NAVBAR AND IT ANIMATION */
+.navbar {
+  position: relative;
+  padding-bottom: 2px;
+  height: 20px !important;
+}
+
+.navbar.route-changing::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2.5px;
+  background-color: tomato;
+  animation: progressBar 3s ease-in-out forwards;
+}
+
+@keyframes progressBar {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+
+
+/* CSS FOR THE FOOTER */
+
+.i-footer {
+  background-color: whitesmoke;
+  border-top: 2px solid #ddd;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left {
+  text-align: left;
+}
+
+.footer-right {
+  text-align: right;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+
+
+/* TO BLUR THE MODAL */
+.modal-blur {
+
+  backdrop-filter: blur(5px);
+  transition: filter 0.3s ease;
+}
+
+
+/* SCHOOL TITLE CSS */
+.school-title {
+  margin-top: 15px;
+  text-align: center !important;
+  color: #ffff;
+  font-weight: 900;
+  white-space: nowrap;    
+  overflow: hidden;       
+  text-overflow: ellipsis; 
+  
+}
+
+.i-text {
+  letter-spacing: 5px;
+}
+
+
+
+
+
+
+.navbar-nav {
+  margin-left: 5px;
+  margin-right: 10px;
+  
+}
+
+.line-border {
+  margin: 15px;
+  border-bottom: 1px solid rgb(224, 222, 222);
+}
+
+
+.nav {
+  margin-left: 28px;
+  border-left: 1px solid rgb(224, 222, 222);
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+
+
+.anchors {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px 0px;
+  text-decoration: none;
+  color: #7b7a7a;
+  border-radius: 2px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.anchors:hover {
+  background-color: #086975;
+  color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.anchors::after {
+  content: "\e61a"; 
+  font-family: "themify";
+  margin-left: 80px;
+  margin-right: -0px;
+  transition: transform 0.3s ease;
+  font-size: 0.7rem;
+}
+
+.anchors[aria-expanded="true"]::after {
+  content: "\e622";
+}
+
+
+
+.inner-item {
+  margin-left: 10px;
+  position: relative;
+}
+
+.inner-item:hover .inner-text::before {
+  content: "\2022";
+  font-size: 2.3rem;
+  color: #086975;
+  position: absolute;
+  left: -17px;
+  top: 46%;
+  transform: translateY(-50%);
+}
+
+.inner-text {
+  transition: color 0.3s ease;
+}
+
+.inner-item:hover .inner-text {
+  color: #086975;
+}
+
+
+.pcoded-navbar{
+  border-right: 2px solid #086975;
+}

@@ -1,0 +1,753 @@
+
+/* COLOR VARIABLES */
+:root {
+    --nav-color: #0e5362;
+    --main-color: #086975;
+    --hover-color: #005265;
+    --text-color: #ffffff;
+    --progress-color: #32c861;
+    --border-color: #dcd9d9;
+    --light-border-color: rgb(224, 222, 222);
+    --background-overlay: rgba(3, 72, 95, 0.8);
+}
+
+
+/* CSS FOR THE NAVBAR AND IT ANIMATION */
+
+.navbar-custom.route-changing::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3.5px;
+    background-color: var(--progress-color);
+    animation: progressBar 3s ease-in-out forwards;
+}
+
+@keyframes progressBar {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+
+/* TO BLUR THE MODAL */
+.modal-blur {
+
+    backdrop-filter: blur(5px);
+    transition: filter 0.3s ease;
+}
+
+
+/* SCHOOL TITLE CSS */
+.school-title {
+    margin-top: 15px;
+    text-align: center !important;
+    color: var(--text-color);
+    font-family: Montserrat, sans-serif;
+    font-weight: 900;
+    width: 600px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+}
+
+.side-logo {
+    margin-top: -20px !important;
+    height: 90px !important;
+    background-image: url("../images/breadcrumb-bg.jpg");
+    background-size: cover;
+    background-position: bottom left;
+    position: relative;
+    border-radius: 0;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-logo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(3, 72, 95, 0.8);
+    z-index: 1;
+    border-radius: inherit;
+}
+
+.side-logo * {
+    position: relative;
+    z-index: 2;
+}
+
+.side-logo img {
+    border: var(--main-color) solid 1px;
+    border-radius: 100%;
+    height: 45px;
+    width: 45px;
+    margin-bottom: 2px;
+}
+
+.school-aliase {
+    color: var(--text-color);
+    font-size: 16px;
+    margin-top: 2px;
+    font-weight: 900;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.line-border {
+    margin: 10px 25px;
+    border-bottom: 1px solid var(--light-border-color);
+}
+
+
+.nav-control {
+    margin-left: 28px;
+    border-left: 1px solid var(--light-border-color);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.nav-control li {
+    margin-left: -25px;
+    position: relative;
+    padding-left: -10px !important;
+}
+
+.nav-control li:hover {
+    font-weight: 900;
+}
+
+/* Adding Font Awesome plus icon on hover */
+.nav-control li:hover::before {
+    content: '\f111';
+    font-family: 'FontAwesome';
+    font-weight: 900;
+    position: absolute;
+    left: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.5rem;
+    color: var(--main-color);
+}
+
+
+.skai-navbar {
+    border-right: 2px solid var(--nav-color) !important;
+    margin-left: 5px !important;
+}
+
+.bg-white {
+    color: var(--nav-color);
+}
+
+.account-logo-box {
+    margin: -35px -35px 0 -35px !important; 
+    height: 90px;
+    background-image: url("../images/breadcrumb-bg.jpg");
+    background-size: cover;
+    background-position: bottom left;
+    position: relative;
+    border-radius: 0;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.account-logo-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(3, 72, 95, 0.8);
+    z-index: -1;
+    border-radius: inherit; 
+}
+
+
+.account-logo-box img {
+    border: var(--text-color) solid 2px;
+    border-radius: 100%;
+    height: 45px;
+    width: 45px;
+    margin-bottom: 2px;
+}
+
+.t-container {
+    border-left: #dcd9d9 solid 2px;
+    margin-left: 10px;
+    padding-left: 10px;
+    width: 250px;
+}
+
+.app-title {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    font-size: 24px;
+    margin-top: -4px !important;
+    font-weight: 900;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+}
+
+.app-sub-title {
+    margin-top: -10px !important;
+    font-weight: 700;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+}
+
+.auth-footer {
+    margin-top: 25px;
+}
+
+.skai-title {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--main-color);
+    font-size: 24px;
+    margin-top: 4px !important;
+    font-weight: 900;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+/* FROM THE AUTHENTICATION TO SETUP */
+
+.h-top {
+    margin-top: 100px !important;
+}
+
+
+.auth-bg-main {
+    margin-top: 40px;
+}
+
+.auth-bg-primary {
+    background-color: rgba(4, 83, 109, 0.7);
+    color: var(--text-color);
+}
+
+
+.text-ibold {
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+.auth-t-head {
+    font-weight: bolder;
+    color: var(--main-color);
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+.auth-title {
+    font-weight: bolder;
+    color: var(--text-color);
+    font-size: 38px;
+}
+.auth-sub-title {
+    font-weight: 900;
+    font-size: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.auth-right-card {
+    margin-left: 1px;
+    border-left: 1px solid rgb(227, 221, 221);
+}
+
+.auth-img {
+    width: 350px;
+    margin-bottom: 50px;
+}
+
+.btn-primary {
+    background-color: var(--main-color);
+    color: var(--text-color);
+    border: none;
+    padding: 8px 15px;
+    /* border-radius: 4px; */
+}
+
+.btn-primary:hover {
+    background-color: var(--hover-color);
+    border: none;
+    padding: 8px 25px;
+    border-radius: 4px;
+}
+
+
+#page-topbar {
+    background-color: var(--hover-color) !important;
+}
+
+.auth-setup-title {
+    font-weight: bold;
+    color: var(--text-color);
+    font-size: 30px;
+    text-align: center;
+    text-transform: uppercase;   
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+
+
+
+.marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.marquee span {
+    display: inline-block;
+    animation: marquee 60s linear infinite;
+    margin-right: 20px !important;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
+.auth-scroll-text {
+    text-align: left;
+    padding-left: 20px;
+    overflow-y: scroll;
+    height: 500px;
+    max-height: 500px;
+}
+
+
+.auth-scroll-text li strong,
+.auth-scroll-text li b {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.auth-scroll-text li strong {
+    color: var(--main-color);
+    font-weight: bold;
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.header-titles {
+    font-size: 24px !important;
+    font-weight: 900 !important;
+    color: var(--main-color) !important;
+    text-transform: uppercase !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* END OF THE AUTHTENTICATION TO SETUP */
+
+
+/* CUSTOM CCHECKBOS START */
+
+.custom-checkboxes {
+    display: flex;
+    gap: 15px;
+}
+
+.custom-card-checkbox {
+    position: relative;
+    cursor: pointer;
+}
+
+.custom-checkbox-input {
+    display: none;
+}
+
+.custom-card {
+    border: 2px solid var(--main-color);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.3s, border-color 0.3s;
+    background-color: var(--text-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
+}
+
+.custom-card:hover {
+    background-color: var(--hover-color);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.custom-checkbox-input:checked + .custom-card {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+    color: var(--text-color);
+}
+
+.custom-icon-container {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.custom-icon-container i {
+    color: var(--main-color);
+}
+
+.custom-header {
+    font-size: 16px !important;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin: 0;
+    color: var(--main-color);
+}
+
+.custom-description {
+    font-size: 13px;
+    margin: 5px 0 0;
+}
+
+/* Change the color to white when checkbox is hovered */
+.custom-card:hover .custom-icon-container i {
+    color: var(--text-color);
+}
+
+.custom-card:hover .custom-header {
+    color: var(--text-color);
+}
+
+.custom-card:hover .custom-description {
+    color: #ccc;
+}
+
+
+/* Change the color to white when checkbox is checked */
+.custom-checkbox-input:checked + .custom-card .custom-icon-container i {
+    color: var(--text-color);
+}
+
+.custom-checkbox-input:checked + .custom-card .custom-header {
+    color: var(--text-color);
+}
+
+
+.text-short {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+  
+
+/* CUSTOM CCHECKBOS END */
+
+
+.required {
+    color: red;
+    font-size: 12px;
+    
+}
+
+
+
+
+@media (max-width: 768px) {
+    .slimscroll-menu {
+        height: 450px !important;
+        overflow-y: scroll !important;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .slimscroll-menu {
+        height: 600px !important;
+        overflow-y: scroll !important;
+    }
+  }
+
+
+
+
+ /* CSS FOR RIGHT SIDE BAR */
+.right-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); 
+    z-index: 1040; 
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .right-bar.show {
+    transform: translateX(0);
+  }
+  
+  .rightbar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1030; 
+  }
+  
+  /* END OF RIGHT SIDE BAR */
+
+
+  /* CSS FOR CHAT BOAT */
+  .chat-boat {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 350px;
+    height: 500px;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    z-index: 1050;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  
+  .chat-boat.show {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  
+  .chat-boat-header {
+    padding: 10px;
+    background-color: var(--main-color);
+    color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .chat-boat-body {
+    padding: 10px;
+    /* flex-grow: 1; */
+    overflow-y: auto;
+    height: 370px;
+  }
+
+  .chat-home-screen, .email-chat {
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    background-color: var(--text-color);
+    color: #302e2e;
+    overflow-y: auto;
+    gap: 1px;
+  }
+
+  .chat-c {
+    border: var(--hover-color) dashed 1.5px;
+  }
+
+  
+  .message {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    max-width: 80%;
+    font-size: 14px;
+  }
+  
+  .message.user {
+    background-color: rgb(182, 175, 175);
+    color: var(--text-color);
+    align-self: flex-end;
+  }
+  
+  .message.bot {
+    background-color: #f1f1f1;
+    color: #333;
+    align-self: flex-start;
+  }
+  
+  .chat-boat-footer {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .chat-boat-footer input {
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 8px;
+  }
+  
+  .chat-boat-footer button {
+    background-color: var(--main-color);
+    color: var(--text-color);
+    border: none;
+    padding: 8px 12px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  /* END OF CHAT BOAT */
+
+
+  /* Preloader Styles */
+  .preloaders {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease;
+    opacity: 1;
+}
+
+.preloader-logo {
+    width: 100px;
+    height: 100px;
+    padding: 15px;
+    border: var(--progress-color) solid 4px;
+    border-radius: 100%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    animation: zoomInOut 2s infinite ease-in-out, borderAnimation 2s infinite ease-in-out;
+}
+
+@keyframes zoomInOut {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes borderAnimation {
+    0% {
+        border-color: var(--progress-color);
+    }
+    50% {
+        border-color: var(--hover-color);
+    }
+    100% {
+        border-color: var(--progress-color);
+    }
+}
+
+
+/* END OF PRELOADER */
+
+
+
+.content-pages {
+    margin-top: 80px !important;
+}
+
+.c-description {
+    list-style-position: inside; 
+    padding-left: 0;
+    text-align: left; 
+    white-space: nowrap; 
+    /* border: solid red 0. */
+}
+
+.custom-hr {
+    border: none;
+    height: 1px;
+    background-color: var(--progress-color);
+    box-shadow: rgb(0, 0, 0, 0.5);
+    margin-top: 0.6rem;
+}
+
+
+.platforms {
+    border-bottom: rgb(235, 232, 232) 1px solid;
+    padding-bottom: 8px;
+}
+.platform-img {
+    width: 30px;
+    border: silver solid 1px;
+    border-radius: 100%
+
+}
+
+
+.i-table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    width: 100%;
+}
+
+
+.table th, .table td {
+    padding: 0.5rem;
+}
+
+.table tr {
+    height: 30px !important; 
+}
+
+
+Swal{
+    width: 600px !important;
+}

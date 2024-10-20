@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title id="pageTitle">Skai Vision Flow | The Universal School Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="keywords" content="bootstrap, school admin template, school theme, school dashboard, school management system template, lms template, responsive, school management template, school fees system" />
+  <meta name="author" content="skaimount" />
+
+  <link rel="shortcut icon" href="/temp/assets/images/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous">
+  <link href="/temp/assets/libs/c3/c3.min.css" rel="stylesheet" type="text/css" />
+  <link href="/temp/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+  <!-- Quill CSS -->
+  <link href="/temp/assets/libs/quill/quill.core.css" rel="stylesheet" type="text/css" />
+  <link href="/temp/assets/libs/quill/quill.bubble.css" rel="stylesheet" type="text/css" />
+  <link href="/temp/assets/libs/quill/quill.snow.css" rel="stylesheet" type="text/css" />
+
+  <!-- App css -->
+  <link href="/temp/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+  <link href="/temp/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+  <link href="/temp/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+  <link href="/temp/assets/css/custom-made.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="left-side-menu-light" data-layout="horizontal">
+  <div class="preloaders">
+    <img src="/temp/assets/images/logo.png" class="preloader-logo" />
+  </div>
+
+  <div id="root"></div>
+  <!-- <div class="editor" style="height: 300px;"></div> -->
+  <script type="module" src="/src/main.jsx"></script>
+
+  
+  <!-- Vendor js -->
+  <script src="/temp/assets/js/vendor.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/temp/assets/libs/stepy/jquery.stepy.js"></script>
+  <script src="/temp/assets/js/pages/wizard.init.js"></script>
+  <script src="/temp/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <!-- Quill JS -->
+  <script src="/temp/assets/libs/katex/katex.min.js"></script>
+  <script src="/temp/assets/libs/quill/quill.min.js"></script>
+
+  <!-- C3 Chart -->
+  <script src="/temp/assets/libs/d3/d3.min.js"></script>
+  <script src="/temp/assets/libs/c3/c3.min.js"></script>
+  <script src="/temp/assets/libs/echarts/echarts.min.js"></script>
+  <script src="/temp/assets/js/pages/dashboard.init.js"></script>
+  <script src="/temp/assets/js/app.min.js"></script>
+
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const preloader = document.querySelector('.preloaders');
+      preloader.style.opacity = '1'; 
+    });
+
+    window.addEventListener('load', () => {
+      const preloader = document.querySelector('.preloaders');
+      preloader.style.opacity = '0'; 
+      setTimeout(() => {
+        preloader.style.display = 'none'; 
+      }, 1000);
+    });
+
+    $(document).ready(function () {
+      $('.select2').select2();
+    });
+
+    // Initialize Quill
+    // const quill = new Quill('.editor', {
+      // theme: 'snow',
+      // modules: {
+        // toolbar: [
+          // ['bold', 'italic', 'underline'],
+          // ['link', 'image', 'video'],  
+          // [{ list: 'ordered' }, { list: 'bullet' }],
+          // [{ 'color': [] }, { 'background': [] }],
+          // [{ 'font': [] }],
+          // [{ 'align': [] }],
+        // ],
+      // },
+    // });
+  </script>
+</body>
+
+</html>
