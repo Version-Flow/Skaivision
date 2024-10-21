@@ -1,0 +1,1494 @@
+
+
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Config from '../../helpers/config';
+
+const SidebarStudent = () => {
+  const [activeSection, setActiveSection] = useState(null);
+
+  useEffect(() => {
+    // Listen for URL hash changes
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      setActiveSection(hash);
+    };
+
+    // Initialize the hash on mount
+    handleHashChange();
+
+    // Attach hash change event listener
+    window.addEventListener('hashchange', handleHashChange);
+
+    // Cleanup the event listener on unmount
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
+  return (
+    <div className="left-side-menu skai-navbar">
+      <div className="side-logo">
+        <img src="/temp/assets/images/logo.png" height={25} alt="Logo" />
+        <h5 className="school-aliase">{Config[0].SCHOOL_ALLIASE}</h5>
+      </div>
+      <div className="slimscroll-menu">
+        <div id="sidebar-menu">
+          <ul className="metismenu" id="side-menu">
+            <li className="menu-title">Navigation</li>
+
+            <li className={activeSection === 'dashboard' ? 'mm-active' : ''}>
+              <a className="anchor" href="#dashboard">
+                <i className="fe-airplay" />
+                <span className="badge badge-success badge-pill float-right">Controls</span>
+                <span> Personal</span>
+              </a>
+              <ul className={`nav-second-level nav-control ${activeSection === 'dashboard' ? 'mm-show' : 'mm-collapse'}`} aria-expanded={activeSection === 'dashboard'}>
+                <li><Link to="/student/dashboard">Dashboard</Link></li>
+                <li><Link to="/student/profile">Profile</Link></li>
+              </ul>
+            </li>
+            <li className="line-border" />
+
+            <li className="menu-title">Apps</li>
+            <li>
+              <a href="tickets.html">
+                <i className="fe-life-buoy" />
+                <span> Tickets </span>
+                <span className="badge badge-danger badge-pill float-right">New</span>
+              </a>
+            </li>
+            <li>
+              <a href="todo.html">
+                <i className="fe-layers" />
+                <span> Todo </span>
+              </a>
+            </li>
+            <li className="line-border" />
+
+            <li className="menu-title">Components</li>
+            <li className={activeSection === 'customControl1' ? 'mm-active' : ''}>
+              <a className="anchor" href="#customControl1">
+                <i className="fe-folder-plus" />
+                <span> Custom Control </span>
+                <span className="menu-arrow" />
+              </a>
+              <ul className={`nav-second-level nav-control ${activeSection === 'customControl1' ? 'mm-show' : 'mm-collapse'}`} aria-expanded={activeSection === 'customControl1'}>
+                <li><a href="#">Sub Control 1</a></li>
+                <li><a href="#">Sub Control 2</a></li>
+              </ul>
+            </li>
+            <li className="line-border" />
+
+            <li className={activeSection === 'customControl2' ? 'mm-active' : ''}>
+              <a className="anchor" href="#customControl2">
+                <i className="fe-folder-plus" />
+                <span> Custom Control 2 </span>
+                <span className="menu-arrow" />
+              </a>
+              <ul className={`nav-second-level nav-control ${activeSection === 'customControl2' ? 'mm-show' : 'mm-collapse'}`} aria-expanded={activeSection === 'customControl2'}>
+                <li><a href="#">Sub Control 3</a></li>
+                <li><a href="#">Sub Control 4</a></li>
+              </ul>
+            </li>
+            <li className="line-border" />
+
+          </ul>
+        </div>
+        <div className="clearfix" />
+      </div>
+    </div>
+  );
+};
+
+export default SidebarStudent;
+
+
+
+
+
+<div className="col-md-12 mt-4">
+
+  <div className="d-flex">
+      <div className="col-md-4 mt-2">
+          <label htmlFor="city" className="col-form-label">First Name <span className='required'>*</span></label>
+          <input type="text" className="form-control" id="city" placeholder="Search by school name" required />
+      </div>
+      <div className="col-md-4 mt-2">
+          <label htmlFor="city" className="col-form-label">Middle Name</label>
+          <input type="text" className="form-control" id="city" placeholder="Search by school name" required />
+      </div>
+      <div className="col-md-4 mt-2">
+          <label htmlFor="city" className="col-form-label">Last Name <span className='required'>*</span></label>
+          <input type="text" className="form-control" id="city" placeholder="Search by school name" required />
+      </div>
+  </div>
+  <div className="d-flex">
+      <div className="col-md-6 mt-2">
+          <label htmlFor="city" className="col-form-label">Index Number <span className='required'>*</span></label>
+          <input type="text" className="form-control" id="city" placeholder="Search by school name" required />
+      </div>
+      <div className="col-md-3 mt-2">
+          <label htmlFor="city" className="col-form-label">Date of Birth <span className='required'>*</span></label>
+          <input type="date" className="form-control" id="city" placeholder="Search by school name" required />
+      </div>
+      <div className="col-md-3 mt-2">
+          <label htmlFor="city" className="col-form-label" title="The one you gave it to Waec">Phone Number <span className='required'>*</span></label>
+          <input type="text" className="form-control" id="city" placeholder="Search by school name" required />
+      </div>
+  </div>
+  <div className="col-md-12 d-flex mt-2">
+      <button type="submit" className="btn btn-info mr-1 mb-1"> <i className='fe-tag'></i> Have Token</button>
+      <button type="submit" className="btn btn-info mr-1 mb-1"> <i className='fe-search'></i> Apply filter</button>
+  </div>
+
+</div>
+
+
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+const AppplicationForms = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    // Get institution name from the previous page
+    const { name } = location.state || {};
+
+    // Example data for the application forms (you can replace this with actual data from an API)
+    const forms = [
+        { id: 1, title: "Form A", description: "Description for Form A", price: "50", currency: "GHS" },
+        { id: 2, title: "Form B", description: "Description for Form B", price: "70", currency: "GHS" },
+        { id: 3, title: "Form C", description: "Description for Form C", price: "0", currency: "GHS" }
+    ];
+
+    // Handle the click event to navigate to another page (or perform another action)
+    const handleFormClick = (form) => {
+        console.log("Form clicked:", form.title);
+
+        // Check the price and show modal if price is less than 1
+        if (form.price < 1) {
+            console.log("Price is less than 1, showing modal");
+            // Show modal using Bootstrap's JS API
+            const modal = new window.bootstrap.Modal(document.getElementById('myModal'));
+            modal.show();
+        } else {
+            console.log("Price is: ", form.price);
+        }
+    };
+
+    useEffect(() => {
+        // Ensure Bootstrap JS is loaded when the component is mounted
+        if (typeof window.bootstrap === 'undefined') {
+            console.error("Bootstrap JS not loaded!");
+        }
+    }, []);
+
+    return (
+        <>
+            <div className="">
+                <div className="col-md-12">
+                    <div className="card-box">
+                        <h2 className="header-titles text-center"><b>Online Admission Market</b></h2>
+                        <h4 className="text-center text-uppercase text-truncate mt-3"><b>{name || "Institution Name"}</b></h4>
+                        <h6 className="text-center text-muted text-uppercase">Select an application form from the list below</h6>
+                        <hr />
+
+                        <form id="default-wizard">
+                            <div className="col-md-12 mt-2">
+                                {forms.map((form) => (
+                                    <a key={form.id} className="card shadow-none bg-primary text-decoration-none mb-2"
+                                        href="#" role="button" onClick={() => handleFormClick(form)}>
+                                        <div className="card-body">
+                                            <h4 className="text-white text-uppercase">{form.title}</h4>
+                                            <p className="card-text text-white">{form.description}</p>
+                                            <h3 className="text-white text-uppercase">{form.currency} {form.price}</h3>
+                                        </div>
+                                    </a>
+                                ))}
+                            </div>
+
+                            <hr />
+                            <button type="button" className="btn btn-secondary mr-1 mb-1" onClick={() => navigate('/school/selection')}>
+                                <i className='fe-arrow-left'></i> Go Back
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            {/* Modal Section */}
+            <div className="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} role="dialog" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered modal-lg">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h4 className="modal-title" id="myModalTitle">Title here</h4>
+                            <img src="/temp/assets/images/sv-bar-color.png" height={20} style={{ opacity: 0.5 }} />
+                            <button type="button" className="close modal-close" data-bs-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="card-block">
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ratione corrupti pariatur sint fugiat consequuntur hic, numquam deleniti molestias reprehenderit eaque, deserunt laboriosam tempora officia recusandae enim, consequatur qui vel!
+                                </p>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default AppplicationForms;
+
+
+
+
+
+<div className="card-box">
+  <ul className="nav nav-tabs tabs-bordered nav-justified">
+    <li className="nav-item">
+      <a href="#home-b2" data-toggle="tab" aria-expanded="false" className="nav-link">
+        <span className="d-block d-sm-none"><i className="mdi mdi-home-variant" /></span>
+        <span className="d-none d-sm-block">Home</span>
+      </a>
+    </li>
+    <li className="nav-item">
+      <a href="#profile-b2" data-toggle="tab" aria-expanded="true" className="nav-link active">
+        <span className="d-block d-sm-none"><i className="mdi mdi-account" /></span>
+        <span className="d-none d-sm-block">Platforms</span>
+      </a>
+    </li>
+
+  </ul>
+  <div className="tab-content">
+    <div className="tab-pane" id="home-b2">
+      Tab 1
+    </div>
+    <div className="tab-pane active" id="profile-b2">
+      Tab 2
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+import { useEffect } from 'react';
+import $ from 'jquery';
+import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css';
+import 'datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css';
+
+// DataTables core
+import 'datatables.net-bs4';
+import 'datatables.net-buttons-bs4';
+import 'datatables.net-responsive-bs4';
+
+// DataTables buttons extensions
+import 'datatables.net-buttons/js/buttons.html5.min.js';
+import 'datatables.net-buttons/js/buttons.print.min.js';
+import 'datatables.net-buttons/js/buttons.colVis.js';
+import 'pdfmake/build/pdfmake';
+import 'pdfmake/build/vfs_fonts';
+import 'jszip';
+
+const Profile = () => {
+  useEffect(() => {
+    const datatable = $('#datatable').DataTable({
+      responsive: true,
+      destroy: true,
+      dom: '<"row"<"col-sm-12 col-md-6 mb-1"B><"col-sm-12 col-md-6 text-md-right"f>>' +
+        '<"row"<"col-sm-12"tr>>' +
+        '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-6 text-md-right"p>>',
+      buttons: ['copy', 'excel', 'pdf', 'colvis', 'print'].map(type => ({ extend: type, className: 'btn btn-sm btn-success ', })),
+    });
+
+    // Select/Deselect All Checkbox functionality
+    $('#select-all').on('click', function () {
+        const checked = $(this).is(':checked');
+        $('.row-select').prop('checked', checked);
+    });
+
+    return () => {
+      datatable.destroy();
+    };
+  }, []);
+
+  return (
+    <>
+      <h5 className='text-monospace'>Profile Which contains Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor mollitia voluptatibus ea cumque explicabo laborum quia maxime voluptatem ex optio beatae minus, deleniti provident consectetur architecto quaerat.</h5>
+      <div className="row">
+        <div className="col-12">
+          <div className="card-box table-responsive">
+
+            <div className='row d-flex col-md-12 justify-content-between align-items-center'>
+              <div className="btn-group">
+                <button type="button" className="btn btn-outline-primary dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">Bulk Actions <i className="mdi mdi-chevron-down" /> </button>
+                <div className="dropdown-menu">
+                  <a className="dropdown-item text-danger" href="#"><i className='fe-trash mr-1'></i>Remove Record</a>
+                  <a className="dropdown-item" href="#"><i className='mdi mdi-folder-open-outline mr-1'></i>Next Action</a>
+                </div>
+              </div>
+
+              <button className='btn btn-primary btn-sm'><i className='fe-plus mr-1'></i>Create New</button>
+            </div>
+
+            <hr className='custom-hr' />
+
+            <table id="datatable" className="table table-striped table-bordered dt-responsive nowrap i-table">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="select-all" /></th>
+                  <th>Name</th>
+                  <th>Position</th>
+                  <th>Office</th>
+                  <th>Age</th>
+                  <th>Start date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" className="row-select" /></td>
+                  <td>Tiger Nixon</td>
+                  <td>System Architect</td>
+                  <td>Edinburgh</td>
+                  <td>61</td>
+                  <td>2011/04/25</td>
+                  <td>
+                    <div className="btn-group dropdown">
+                      <a href="#" className="btn btn-outline-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Actions<i className="mdi mdi-dots-vertical" /></a>
+                      <div className="dropdown-menu dropdown-menu-right">
+                        <a className="dropdown-item" href="#"><i className="mdi mdi-pencil mr-1 font-18" />Edit Ticket</a>
+                        <a className="dropdown-item" href="#"><i className="mdi mdi-check-all mr-1 font-18" />Close</a>
+                        <a className="dropdown-item" href="#"><i className="mdi mdi-delete mr-1 font-18" />Remove</a>
+                        <a className="dropdown-item" href="#"><i className="mdi mdi-star mr-1 font-18" />Mark as Favorite</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" className="row-select" /></td>
+                  <td>Garrett Winters</td>
+                  <td>Accountant</td>
+                  <td>Tokyo</td>
+                  <td>63</td>
+                  <td>2011/07/25</td>
+                  <td>
+                    <div className="btn-group dropdown">
+                      <a href="#" className="btn btn-outline-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Actions<i className="mdi mdi-dots-vertical" /></a>
+                      <div className="dropdown-menu dropdown-menu-right">
+                        <a className="dropdown-item" href="#"><i className="mdi mdi-pencil mr-1 font-18" />Edit Ticket</a>
+                        <a className="dropdown-item" href="#"><i className="mdi mdi-check-all mr-1 font-18" />Close</a>
+                        <a className="dropdown-item" href="#"><i className="mdi mdi-delete mr-1 font-18" />Remove</a>
+                        <a className="dropdown-item" href="#"><i className="mdi mdi-star mr-1 font-18" />Mark as Favorite</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" className="row-select" /></td>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009/01/12</td>
+                  <td>
+                    <div className="btn-group dropdown">
+                      <a href="#" className="btn btn-outline-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Actions<i className="mdi mdi-dots-vertical" /></a>
+                      <div className="dropdown-menu dropdown-menu-right">
+                        <a className="dropdown-item" href="#"><i className="mdi mdi-pencil mr-1 font-18" />Edit Ticket</a>
+                        <a className="dropdown-item" href="#"><i className="mdi mdi-check-all mr-1 font-18" />Close</a>
+                        <a className="dropdown-item" href="#"><i className="mdi mdi-delete mr-1 font-18" />Remove</a>
+                        <a className="dropdown-item" href="#"><i className="mdi mdi-star mr-1 font-18" />Mark as Favorite</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Profile;
+===========================================================================================================
+
+
+
+
+=========================================================================================================
+
+/* drawCallback: function () {
+  // Select/Deselect All Checkbox functionality
+  $('#select-all').on('click', function () {
+    const checked = $(this).is(':checked');
+    $('.row-select').prop('checked', checked);
+    setBulkButton(checked || $('.row-select:checked').length > 0);
+  });
+
+  // Individual checkbox change handler
+  $('.row-select').on('change', function () {
+    const anyChecked = $('.row-select:checked').length > 0;
+    setBulkButton(anyChecked);
+  });
+} */
+
+
+
+
+==============================================================================================================================
+
+
+import { useEffect,  useState } from 'react';
+import $ from 'jquery';
+import Config from '../../../../helpers/config';
+import { useOutletContext } from 'react-router-dom';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+
+
+const Roles = () => {
+
+  const headers = Config[0].headers;
+  const baseUrl = Config[0].BASE_URL;
+
+  const [data, setData] = useState([]);
+  const { setPageTitle } = useOutletContext();
+  const [isSaving, setIsSaving] = useState(false);
+  const [isAnySelected, setBulkButton] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  // State to manage input fields
+  const [role, setRole] = useState('');
+  const [description, setDescription] = useState('There is no description for now');
+  const [roleId, setRoleId] = useState(null);
+
+  // Set the page title dynamically
+  useEffect(() => {
+    const titles = "Roles";
+    setPageTitle(titles);
+    Config[0].currentPage = titles;
+    document.getElementById("pageTitle").innerHTML = Config[0].currentPage + Config[0].APP_TITLE;
+  }, [setPageTitle]);
+
+
+  // Fetch data from your API or use static data
+  const fetchData = () => {
+    // Fetch data from the API
+    axios.get(`${baseUrl}/settings/roles`, { headers })
+      .then(response => {
+        const fetchedData = response.data;
+        if (fetchedData.success) {
+          setData(fetchedData.data);
+        } else {
+          Swal.fire({ icon: 'error', title: 'Error!', text: fetchedData.message });
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        Swal.fire({ icon: 'error', title: 'Error!', text: 'Failed to fetch data.' });
+      });
+  };
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [baseUrl, headers]);
+
+
+  //Datatable initialization and populating
+  useEffect(() => {
+    // Format the data before passing it to the DataTable
+    const formattedData = data.map(item => ({
+      ...item,
+      created_at: item.created_at.replace('T', ' ').slice(0, 19)
+    }));
+
+    const datatable = $('#datatable').DataTable({
+      responsive: true,
+      destroy: true,
+      rowReorder: false,
+      dom: '<"row"<"col-sm-12 col-md-6 mb-1"B><"col-sm-12 col-md-6 text-md-right"f>>' +
+        '<"row"<"col-sm-12"tr>>' +
+        '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-6 text-md-right"p>>',
+      buttons: ['copy', 'excel', 'pdf', 'colvis', 'print'].map(type => ({ extend: type, className: 'btn btn-sm btn-success' })),
+      data: formattedData,
+      columns: [
+
+        {
+          data: null, render: function (data) {
+            return `<input type="checkbox" class="row-select" data-title="${data.title}" data-id="${data.id}" />`;
+          }
+        },
+
+        { data: 'title' },
+        { data: 'description', width: '100%' },
+        { data: 'created_at' },
+        { data: 'status' },
+        {
+          data: null, render: function (data) {
+            return `
+              <div class="btn-group dropdown">
+                  <a href="#" class="btn btn-outline-secondary table-action-btn dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false">Action Here<i class="mdi mdi-dots-vertical"></i></a>
+                  <div class="dropdown-menu dropdown-menu-right">
+                      <a class="dropdown-item edit-btn" 
+                        href="#" data-title="${data.title}" data-description="${data.description}" data-id="${data.id}">
+                        <i class="mdi mdi-pencil mr-1 text-muted font-18 vertical-middle"></i>Modify Record
+                      </a> 
+                      <a class="dropdown-item" href="#"><i class="mdi mdi-star-outline mr-1 font-18 text-muted vertical-middle"></i>Mark as Favorite</a>
+                      <a class="dropdown-item text-danger delete-btn" href="#" data-title="${data.title}" data-id="${data.id}"><i class="mdi mdi-delete-outline mr-1 font-18 vertical-middle"></i>Remove Record</a>
+                  </div>
+              </div>
+            `;
+          }
+        },
+      ],
+      // Reinitialize dropdown after DataTable draw
+      drawCallback: function () {
+        // Select/Deselect All Checkbox functionality
+        $('#select-all').on('click', function () {
+          const checked = $(this).is(':checked');
+          $('.row-select').prop('checked', checked);
+
+          if (checked) {
+            const allSelectedItems = formattedData.map(item => ({ id: item.id, title: item.title }));
+            setSelectedItems(allSelectedItems);
+            setBulkButton(true);
+          } else {
+            setSelectedItems([]);
+            setBulkButton(false);
+          }
+        });
+
+        // Use event delegation
+        $('.row-select').on('change', function () {
+          const id = $(this).data('id');
+          const title = $(this).data('title');
+
+          if ($(this).is(':checked')) {
+            setSelectedItems(prev => [...prev, { id, title }]);
+          } else {
+            setSelectedItems(prev => prev.filter(item => item.id !== id));
+          }
+      
+          const anyChecked = $('.row-select:checked').length > 0;
+          setBulkButton(anyChecked);
+        });
+        
+      }
+
+
+    });
+
+    return () => {
+      datatable.destroy();
+    };
+  }, [data]);
+
+
+  // Calling New Modal for Creating New
+  const createNew = () => {
+    document.getElementById('modal-title').innerText = "Creating New Role";
+    $('#btn-edit').hide();
+    $('#btn-save').show();
+
+    window.bootstrap.Modal.getOrCreateInstance(document.getElementById('myModal')).show();
+  };
+
+
+  // Global event binding for edit buttons
+  $(document).on('click', '.edit-btn', function (e) {
+    e.preventDefault();
+    const title = $(this).data('title');
+    const description = $(this).data('description');
+    const id = $(this).data('id');
+
+
+    setRole(title);
+    setDescription(description);
+    setRoleId(id);
+    
+
+    document.getElementById('modal-title').innerText = "Modifying " + title;
+    $('#btn-save').hide();
+    $('#btn-edit').show();
+
+    document.querySelector('#role').dispatchEvent(new Event('change'));
+
+    window.bootstrap.Modal.getOrCreateInstance(document.getElementById('myModal')).show();
+  });
+
+  // Global event binding for delete buttons
+  $(document).on('click', '.delete-btn', function (e) {
+    e.preventDefault();
+
+    const title = $(this).data('title');
+    const id = $(this).data('id');
+
+    Swal.fire({
+      title: "Confirm Action",
+      html: `Are you sure you want to remove <strong>${title}</strong> from the records ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#32c861',
+      cancelButtonColor: '#f96a74',
+      confirmButtonText: 'Yes, proceed',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.post(`${baseUrl}/settings/roles/delete`, { role_id: id }, { headers })
+          .then(response => {
+            const data = response.data;
+            if (data.success) {
+              Swal.fire({ icon: 'success', title: 'Success!', text: data.message, }).then(() => {
+                fetchData();
+              });
+            } else { Swal.fire({ icon: 'error', title: 'Failed!', text: data.message, }); }
+          })
+          .catch(error => {
+            if (error.response && error.response.data) {
+              const errorMessage = error.response.data.message || 'An unexpected error occurred.';
+              Swal.fire({ icon: 'error', title: 'Error!', text: errorMessage });
+            } else {
+              Swal.fire({ icon: 'error', title: 'Error!', text: 'An error occurred while sending the request' });
+            }
+          })
+          .finally(() => {
+            setIsSaving(false);
+          });
+      }
+    });
+  });
+
+
+  // Clear data
+  const clearData = () => {
+    // eslint-disable-next-line no-undef
+    const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
+    if (modal) {
+      modal.hide();
+    }
+    setRole('');
+    setDescription('');
+    setRoleId(null);
+    fetchData();
+  }
+
+
+  // Ready to save the data
+  const sendSaveRequest = () => {
+
+    if (!role) {
+      Swal.fire({ icon: 'warning', title: 'Attention Please', text: 'Please fill all the fields and it is required', });
+      return;
+    }
+
+    // Disable the button and show loading indicator
+    setIsSaving(true);
+
+    const payload = { title:role, description };
+
+    // Send POST request to the API using axios
+    axios.post(`${baseUrl}/settings/roles`, payload, { headers })
+      .then(response => {
+        const data = response.data;
+        if (data.success) {
+          Swal.fire({ icon: 'success', title: 'Success!', text: data.message, }).then(() => {
+            clearData();
+
+          });
+        } else {
+          Swal.fire({ icon: 'error', title: 'Failed!', text: data.message, });
+        }
+      })
+      .catch(error => {
+        if (error.response && error.response.data) {
+          const errorMessage = error.response.data.message || 'An unexpected error occurred.';
+          Swal.fire({ icon: 'error', title: 'Error!', text: errorMessage });
+        } else {
+          Swal.fire({ icon: 'error', title: 'Error!', text: 'An error occurred while sending the request' });
+        }
+      })
+      .finally(() => {
+        setIsSaving(false);
+      });
+  };
+
+  // Ready to edit the data
+  const sendEditRequest = () => {
+   
+
+    if (!role || !roleId) {
+      Swal.fire({ icon: 'warning', title: 'Attention Please', text: 'Please fill all the fields and it is required', });
+      return;
+    }
+
+    // Disable the button and show loading indicator
+    setIsSaving(true);
+
+    const payload = { role_id:roleId, title:role, description };
+
+    // Send POST request to the API using axios
+    axios.post(`${baseUrl}/settings/roles/update`, payload, { headers })
+      .then(response => {
+        const data = response.data;
+        if (data.success) {
+          Swal.fire({ icon: 'success', title: 'Success!', text: data.message, }).then(() => {
+            clearData();
+          });
+        } else {
+          Swal.fire({ icon: 'error', title: 'Failed!', text: data.message, });
+        }
+      })
+      .catch(error => {
+        if (error.response && error.response.data) {
+          const errorMessage = error.response.data.message || 'An unexpected error occurred.';
+          Swal.fire({ icon: 'error', title: 'Error!', text: errorMessage });
+        } else {
+          Swal.fire({ icon: 'error', title: 'Error!', text: 'An error occurred while sending the request' });
+        }
+      })
+      .finally(() => {
+        setIsSaving(false);
+      });
+  };
+
+  // Get all input, select, and textarea elements within the .card-block
+  const resetInputFields = () => {
+    const cardBlock = document.querySelector('.card-block');
+
+    if (cardBlock) {
+      const inputs = cardBlock.querySelectorAll('input, select, textarea');
+      inputs.forEach(input => {
+        if (input.type === 'hidden' || input.type === 'submit') return;
+
+        if (input.classList.contains('select2')) {
+          input.selectedIndex = 0, input.dispatchEvent(new Event('change'));
+        } else {
+          input.value = '';
+        }
+      });
+    }
+  };
+
+
+  // Prepare the selected items and remove them bulk
+  const getReadyListRemove = () => {
+    if (selectedItems.length === 0) {
+      alert("No records selected for removal.");
+      return;
+    }
+
+    const titles = selectedItems.map(item => item.title).join(', ');
+    const ids = selectedItems.map(item => item.id);
+
+    Swal.fire({
+      title: "Confirm Action",
+      html: `Are you sure you want to remove the following items <strong>${titles}</strong> from the records ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#32c861',
+      cancelButtonColor: '#f96a74',
+      confirmButtonText: 'Yes, proceed',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.post(`${baseUrl}/settings/roles/delete`, { ids: ids }, { headers })
+          .then(response => {
+            const data = response.data;
+            if (data.success) {
+              Swal.fire({ icon: 'success', title: 'Success!', text: data.message, }).then(() => {
+                fetchData();
+              });
+            } else { Swal.fire({ icon: 'error', title: 'Failed!', text: data.message, }); }
+          })
+          .catch(error => {
+            if (error.response && error.response.data) {
+              const errorMessage = error.response.data.message || 'An unexpected error occurred.';
+              Swal.fire({ icon: 'error', title: 'Error!', text: errorMessage });
+            } else {
+              Swal.fire({ icon: 'error', title: 'Error!', text: 'An error occurred while sending the request' });
+            }
+          })
+      }
+    });
+
+  };
+
+
+  
+
+  return (
+    <>
+
+      <div className="row">
+        <div className="col-12">
+          <div className="card-box table-responsive">
+            <div className='row d-flex col-md-12 justify-content-between align-items-center'>
+              {isAnySelected && (
+                <div className="btn-group">
+                  <button type="button" className="btn btn-outline-primary dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">
+                    Bulk Actions <i className="mdi mdi-chevron-down" />
+                  </button>
+                  <div className="dropdown-menu">
+                    <a className="dropdown-item text-danger" href="#" onClick={getReadyListRemove}><i className='fe-trash mr-1'></i>Remove Record</a>
+                    <a className="dropdown-item" href="#"><i className='mdi mdi-folder-open-outline mr-1'></i>Next Action</a>
+                  </div>
+                </div>
+              )}
+              <button className='btn btn-primary btn-sm' onClick={createNew}><i className='fe-plus mr-1'></i>Create New</button>
+            </div>
+
+            <hr className='custom-hr' />
+
+            <table id="datatable" className="table table-striped table-bordered dt-responsive nowrap i-table">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="select-all" /></th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Date Added</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div className="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} role="dialog" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="modal-title text-truncate" id="modal-title">...</h4>
+              <img src="/temp/assets/images/sv-bar-color.png" height={20} style={{ opacity: 0.5 }} />
+              <button type="button" className="close modal-close" data-bs-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div className="modal-body">
+
+              <div className="card-block">
+                <input type="hidden" id='gottenId' />
+
+                <div className="col-md-12">
+                  <label htmlFor="buyerName" className="form-label">Select Role you want to create <span className='required'>*</span></label>
+                  <select className="form-control select2" id="role" value={role} onChange={(e) => setRole(e.target.value)}  required >
+                    <option value="">Choose...</option>
+                    <optgroup label="INSTITUTIONAL ROLES">
+                      <option value="Student">Student</option>
+                      <option value="Instructor">Instructor</option>
+                      <option value="House Master">House Master</option>
+                      <option value="Senior House Master">Senior House Master</option>
+                      <option value="HOD">HOD</option>
+                      <option value="Head Administration">Head Administration</option>
+                      <option value="Head Academics">Head Academics</option>
+                      <option value="Principal">Principal</option>
+                      <option value="Head Domestic">Head Domestic</option>
+                      <option value="Accountant">Accountant</option>
+                      <option value="Bursar">Bursar</option>
+                      <option value="Health Assistant">Health Assistant</option>
+                      <option value="Parent">Parent</option>
+                    </optgroup>
+                    <optgroup label="MANAGERIAL ROLES">
+                      <option value="Marketer">Marketer</option>
+                      <option value="Editor">Editor</option>
+                      <option value="Developer">Developer</option>
+                      <option value="Front-desk">Front-desk</option>
+                      <option value="HR">Human Resource</option>
+                      <option value="Manager">Manager</option>
+                      <option value="Supervisor">Supervisor</option>
+                    </optgroup>
+                    <optgroup label="POLITICAL ROLES">
+                      <option value="Coordinator">Coordinator</option>
+                      <option value="Electoral Officer">Electoral Officer</option>
+                      <option value="Presiding Member">Presiding Member</option>
+                      <option value="Candidate">Candidate</option>
+                      <option value="Delegate">Delegate</option>
+                    </optgroup>
+
+                  </select>
+
+                </div>
+                <div className="col-md-12 mt-2">
+                  <label htmlFor="phone" className="form-label">Role Decriptions</label>
+                  <textarea className='form-control' rows="2" id="description" value={description} onChange={(e) => setDescription(e.target.value)}> </textarea>
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button type='reset' className="btn btn-danger btn-sm" onClick={resetInputFields}><i className='mdi mdi-delete-empty mr-1'></i>Clear</button>
+              <button className="btn btn-info btn-sm" id='btn-save' onClick={sendSaveRequest} disabled={isSaving}>
+                {isSaving ? <><i className="mdi mdi-atom-variant mdi-spin"></i> Sending...</> : <><i className="mdi mdi-account-convert mr-1"></i>Send Request</>}
+              </button>
+              <button className="btn btn-info btn-sm" id='btn-edit' onClick={sendEditRequest} disabled={isSaving}>
+                {isSaving ? <><i className="mdi mdi-atom-variant mdi-spin"></i> Sending...</> : <><i className="mdi mdi-account-convert mr-1"></i>Send Request</>}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </>
+  );
+};
+
+export default Roles;
+================================================================================================================
+
+import { useEffect, useState } from 'react';
+import $ from 'jquery';
+import Config from '../../../../helpers/config';
+import { useOutletContext } from 'react-router-dom';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+
+
+const Roles = () => {
+
+  const headers = Config[0].headers;
+  const baseUrl = Config[0].BASE_URL;
+
+
+  const [data, setData] = useState([]);
+  const { setPageTitle } = useOutletContext();
+  const [isSaving, setIsSaving] = useState(false);
+  const [isAnySelected, setBulkButton] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  // Set the page title dynamically
+  useEffect(() => {
+    const titles = "Roles";
+    setPageTitle(titles);
+    Config[0].currentPage = titles;
+    document.getElementById("pageTitle").innerHTML = Config[0].currentPage + Config[0].APP_TITLE;
+  }, [setPageTitle]);
+
+
+  // Fetch data from your API or use static data
+  const fetchData = () => {
+    // Fetch data from the API
+    axios.get(`${baseUrl}/settings/roles`, { headers })
+      .then(response => {
+        const fetchedData = response.data;
+        if (fetchedData.success) {
+          setData(fetchedData.data);
+        } else {
+          Swal.fire({ icon: 'error', title: 'Error!', text: fetchedData.message });
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        Swal.fire({ icon: 'error', title: 'Error!', text: 'Failed to fetch data.' });
+      });
+  };
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [baseUrl, headers]);
+
+
+  //Datatable initialization and populating
+  useEffect(() => {
+    // Format the data before passing it to the DataTable
+    const formattedData = data.map(item => ({
+      ...item,
+      created_at: item.created_at.replace('T', ' ').slice(0, 19)
+    }));
+
+    const datatable = $('#datatable').DataTable({
+      responsive: true,
+      destroy: true,
+      rowReorder: false,
+      dom: '<"row"<"col-sm-12 col-md-6 mb-1"B><"col-sm-12 col-md-6 text-md-right"f>>' +
+        '<"row"<"col-sm-12"tr>>' +
+        '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-6 text-md-right"p>>',
+      buttons: ['copy', 'excel', 'pdf', 'colvis', 'print'].map(type => ({ extend: type, className: 'btn btn-sm btn-success' })),
+      data: formattedData,
+      columns: [
+
+        {
+          data: null, render: function (data) {
+            return `<input type="checkbox" class="row-select" data-title="${data.title}" data-id="${data.id}" />`;
+          }
+        },
+
+        { data: 'title' },
+        { data: 'description', width: '100%' },
+        { data: 'created_at' },
+        { data: 'status' },
+        {
+          data: null, render: function (data) {
+            return `
+              <div class="btn-group dropdown">
+                  <a href="#" class="btn btn-outline-secondary table-action-btn dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false">Action Here<i class="mdi mdi-dots-vertical"></i></a>
+                  <div class="dropdown-menu dropdown-menu-right">
+                      <a class="dropdown-item edit-btn" 
+                        href="#" data-title="${data.title}" data-description="${data.description}" data-id="${data.id}">
+                        <i class="mdi mdi-pencil mr-1 text-muted font-18 vertical-middle"></i>Modify Record
+                      </a> 
+                      <a class="dropdown-item" href="#"><i class="mdi mdi-star-outline mr-1 font-18 text-muted vertical-middle"></i>Mark as Favorite</a>
+                      <a class="dropdown-item text-danger delete-btn" href="#" data-title="${data.title}" data-id="${data.id}"><i class="mdi mdi-delete-outline mr-1 font-18 vertical-middle"></i>Remove Record</a>
+                  </div>
+              </div>
+            `;
+          }
+        },
+      ],
+      // Reinitialize dropdown after DataTable draw
+      drawCallback: function () {
+
+        // Select/Deselect All Checkbox functionality
+        $('#select-all').on('click', function () {
+          const checked = $(this).is(':checked');
+          $('.row-select').prop('checked', checked);
+
+          if (checked) {
+            const allSelectedItems = formattedData.map(item => ({ id: item.id, title: item.title }));
+            setSelectedItems(allSelectedItems);
+            setBulkButton(true);
+          } else {
+            setSelectedItems([]);
+            setBulkButton(false);
+          }
+        });
+
+        // Use event delegation
+        $('.row-select').on('change', function () {
+          const id = $(this).data('id');
+          const title = $(this).data('title');
+
+          if ($(this).is(':checked')) {
+            setSelectedItems(prev => [...prev, { id, title }]);
+          } else {
+            setSelectedItems(prev => prev.filter(item => item.id !== id));
+          }
+
+          const anyChecked = $('.row-select:checked').length > 0;
+          setBulkButton(anyChecked);
+        });
+
+      }
+
+
+    });
+
+    return () => {
+      datatable.destroy();
+    };
+  }, [data]);
+
+
+  // Calling New Modal for Creating New
+  const createNew = () => {
+    document.getElementById('modal-title').innerText = "Creating New Role";
+    $('#btn-edit').hide();
+    $('#btn-save').show();
+
+    window.bootstrap.Modal.getOrCreateInstance(document.getElementById('myModal')).show();
+  };
+
+ 
+
+  // Global event binding for edit buttons
+ /*  $(document).on('click', '.edit-btn', function (e) {
+    e.preventDefault();
+    const title = $(this).data('title');
+    const description = $(this).data('description');
+    const id = $(this).data('id');
+
+
+    document.querySelector('#role').value = title;
+    document.querySelector('#role').dispatchEvent(new Event('change'));
+    document.getElementById('description').value = description;
+    document.getElementById('gottenId').value = id;
+
+    document.getElementById('modal-title').innerText = "Modifying " + title;
+    $('#btn-save').hide();
+    $('#btn-edit').show();
+
+    window.bootstrap.Modal.getOrCreateInstance(document.getElementById('myModal')).show();
+  }); */
+
+  useEffect(() => {
+    const handleEditClick = (e) => {
+      e.preventDefault();
+      
+      // Get the clicked button's data attributes
+      const button = $(e.currentTarget);
+      const title = button.data('title');
+      const description = button.data('description');
+      const id = button.data('id');
+
+      // Set the values into the input fields
+      document.querySelector('#role').value = title;
+      document.querySelector('#role').dispatchEvent(new Event('change'));
+      document.getElementById('description').value = description;
+      document.getElementById('gottenId').value = id;
+
+      // Update modal title and show it
+      document.getElementById('modal-title').innerText = "Modifying " + title;
+      $('#btn-save').hide();
+      $('#btn-edit').show();
+
+      // Now show the modal after data is populated
+      window.bootstrap.Modal.getOrCreateInstance(document.getElementById('myModal')).show();
+    };
+
+    $(document).on('click', '.edit-btn', handleEditClick);
+
+    return () => {
+      $(document).off('click', '.edit-btn', handleEditClick);
+    };
+  }, []);
+
+
+
+  // Global event binding for delete buttons
+  $(document).on('click', '.delete-btn', function (e) {
+    e.preventDefault();
+
+    const title = $(this).data('title');
+    const id = $(this).data('id');
+
+    Swal.fire({
+      title: "Confirm Action",
+      html: `Are you sure you want to remove <strong>${title}</strong> from the records ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#32c861',
+      cancelButtonColor: '#f96a74',
+      confirmButtonText: 'Yes, proceed',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.post(`${baseUrl}/settings/roles/delete`, { role_id: id }, { headers })
+          .then(response => {
+            const data = response.data;
+            if (data.success) {
+              Swal.fire({ icon: 'success', title: 'Success!', text: data.message, }).then(() => {
+                fetchData();
+              });
+            } else { Swal.fire({ icon: 'error', title: 'Failed!', text: data.message, }); }
+          })
+          .catch(error => {
+            if (error.response && error.response.data) {
+              const errorMessage = error.response.data.message || 'An unexpected error occurred.';
+              Swal.fire({ icon: 'error', title: 'Error!', text: errorMessage });
+            } else {
+              Swal.fire({ icon: 'error', title: 'Error!', text: 'An error occurred while sending the request' });
+            }
+          })
+          .finally(() => {
+            setIsSaving(false);
+          });
+      }
+    });
+  });
+
+
+  // Clear data
+  const clearData = () => {
+    // eslint-disable-next-line no-undef
+    const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
+    if (modal) {
+      modal.hide();
+    }
+    window.bootstrap.Modal.getOrCreateInstance(document.getElementById('myModal')).show();
+    document.getElementById('role').selectedIndex = 0;
+    document.getElementById('description').value = '';
+    fetchData();
+  }
+
+
+  // Ready to save the data
+  const sendSaveRequest = () => {
+    const title = document.getElementById('role').value;
+    const description = document.getElementById('description').value;
+
+
+    if (!title) {
+      Swal.fire({ icon: 'warning', title: 'Attention Please', text: 'Please fill all the fields and it is required', });
+      return;
+    }
+
+    // Disable the button and show loading indicator
+    setIsSaving(true);
+
+    const payload = { title, description };
+
+    // Send POST request to the API using axios
+    axios.post(`${baseUrl}/settings/roles`, payload, { headers })
+      .then(response => {
+        const data = response.data;
+        if (data.success) {
+          Swal.fire({ icon: 'success', title: 'Success!', text: data.message, }).then(() => {
+            clearData();
+
+          });
+        } else {
+          Swal.fire({ icon: 'error', title: 'Failed!', text: data.message, });
+        }
+      })
+      .catch(error => {
+        if (error.response && error.response.data) {
+          const errorMessage = error.response.data.message || 'An unexpected error occurred.';
+          Swal.fire({ icon: 'error', title: 'Error!', text: errorMessage });
+        } else {
+          Swal.fire({ icon: 'error', title: 'Error!', text: 'An error occurred while sending the request' });
+        }
+      })
+      .finally(() => {
+        setIsSaving(false);
+      });
+  };
+
+  // Ready to edit the data
+  const sendEditRequest = () => {
+    const title = document.getElementById('role').value;
+    const description = document.getElementById('description').value;
+    const role_id = document.getElementById('gottenId').value;
+
+
+    if (!title) {
+      Swal.fire({ icon: 'warning', title: 'Attention Please', text: 'Please fill all the fields and it is required', });
+      return;
+    }
+
+    // Disable the button and show loading indicator
+    setIsSaving(true);
+
+    const payload = { role_id, title, description };
+
+    // Send POST request to the API using axios
+    axios.post(`${baseUrl}/settings/roles/update`, payload, { headers })
+      .then(response => {
+        const data = response.data;
+        if (data.success) {
+          Swal.fire({ icon: 'success', title: 'Success!', text: data.message, }).then(() => {
+            clearData();
+          });
+        } else {
+          Swal.fire({ icon: 'error', title: 'Failed!', text: data.message, });
+        }
+      })
+      .catch(error => {
+        if (error.response && error.response.data) {
+          const errorMessage = error.response.data.message || 'An unexpected error occurred.';
+          Swal.fire({ icon: 'error', title: 'Error!', text: errorMessage });
+        } else {
+          Swal.fire({ icon: 'error', title: 'Error!', text: 'An error occurred while sending the request' });
+        }
+      })
+      .finally(() => {
+        setIsSaving(false);
+      });
+  };
+
+
+  // Get all input, select, and textarea elements within the .card-block
+  const resetInputFields = () => {
+    const cardBlock = document.querySelector('.card-block');
+
+    if (cardBlock) {
+      const inputs = cardBlock.querySelectorAll('input, select, textarea');
+      inputs.forEach(input => {
+        if (input.type === 'hidden' || input.type === 'submit') return;
+
+        if (input.classList.contains('select2')) {
+          input.selectedIndex = 0, input.dispatchEvent(new Event('change'));
+        } else {
+          input.value = '';
+        }
+      });
+    }
+  };
+
+
+  // Prepare the selected items and remove them bulk
+  const getReadyListRemove = () => {
+    if (selectedItems.length === 0) {
+      alert("No records selected for removal.");
+      return;
+    }
+
+    const titles = selectedItems.map(item => item.title).join(', ');
+    const ids = selectedItems.map(item => item.id);
+
+    Swal.fire({
+      title: "Confirm Action",
+      html: `Are you sure you want to remove the following items <strong>${titles}</strong> from the records ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#32c861',
+      cancelButtonColor: '#f96a74',
+      confirmButtonText: 'Yes, proceed',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.post(`${baseUrl}/settings/roles/delete`, { ids: ids }, { headers })
+          .then(response => {
+            const data = response.data;
+            if (data.success) {
+              Swal.fire({ icon: 'success', title: 'Success!', text: data.message, }).then(() => {
+                fetchData();
+              });
+            } else { Swal.fire({ icon: 'error', title: 'Failed!', text: data.message, }); }
+          })
+          .catch(error => {
+            if (error.response && error.response.data) {
+              const errorMessage = error.response.data.message || 'An unexpected error occurred.';
+              Swal.fire({ icon: 'error', title: 'Error!', text: errorMessage });
+            } else {
+              Swal.fire({ icon: 'error', title: 'Error!', text: 'An error occurred while sending the request' });
+            }
+          })
+      }
+    });
+
+  };
+
+
+
+  return (
+    <>
+
+
+      <div className="row">
+        <div className="col-12">
+          <div className="card-box table-responsive">
+            <div className='row d-flex col-md-12 justify-content-between align-items-center'>
+              {isAnySelected && (
+                <div className="btn-group">
+                  <button type="button" className="btn btn-outline-primary dropdown-toggle waves-effect" data-toggle="dropdown" aria-expanded="false">
+                    Bulk Actions <i className="mdi mdi-chevron-down" />
+                  </button>
+                  <div className="dropdown-menu">
+                    <a className="dropdown-item text-danger" href="#" onClick={getReadyListRemove}><i className='fe-trash mr-1'></i>Remove Record</a>
+                    <a className="dropdown-item" href="#"><i className='mdi mdi-folder-open-outline mr-1'></i>Next Action</a>
+                  </div>
+                </div>
+              )}
+              <button className='btn btn-primary btn-sm' onClick={createNew}><i className='fe-plus mr-1'></i>Create New</button>
+            </div>
+
+            <hr className='custom-hr' />
+
+            <table id="datatable" className="table table-striped table-bordered dt-responsive nowrap i-table">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="select-all" /></th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Date Added</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+      <div className="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} role="dialog" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="modal-title text-truncate" id="modal-title">...</h4>
+              <img src="/temp/assets/images/sv-bar-color.png" height={20} style={{ opacity: 0.5 }} />
+              <button type="button" className="close modal-close" data-bs-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div className="modal-body">
+
+              <div className="card-block">
+                <input type="hidden" id='gottenId' />
+
+                <div className="col-md-12">
+                  <label htmlFor="buyerName" className="form-label">Select Role you want to create <span className='required'>*</span></label>
+                  <select className="form-control select2" id="role" required>
+                    <option value="">Choose...</option>
+                    <optgroup label="INSTITUTIONAL ROLES">
+                      <option value="Student">Student</option>
+                      <option value="Instructor">Instructor</option>
+                      <option value="House Master">House Master</option>
+                      <option value="Senior House Master">Senior House Master</option>
+                      <option value="HOD">HOD</option>
+                      <option value="Head Administration">Head Administration</option>
+                      <option value="Head Academics">Head Academics</option>
+                      <option value="Principal">Principal</option>
+                      <option value="Head Domestic">Head Domestic</option>
+                      <option value="Accountant">Accountant</option>
+                      <option value="Bursar">Bursar</option>
+                      <option value="Health Assistant">Health Assistant</option>
+                      <option value="Parent">Parent</option>
+                    </optgroup>
+                    <optgroup label="MANAGERIAL ROLES">
+                      <option value="Marketer">Marketer</option>
+                      <option value="Editor">Editor</option>
+                      <option value="Developer">Developer</option>
+                      <option value="Front-desk">Front-desk</option>
+                      <option value="HR">Human Resource</option>
+                      <option value="Manager">Manager</option>
+                      <option value="Supervisor">Supervisor</option>
+                    </optgroup>
+                    <optgroup label="POLITICAL ROLES">
+                      <option value="Coordinator">Coordinator</option>
+                      <option value="Electoral Officer">Electoral Officer</option>
+                      <option value="Presiding Member">Presiding Member</option>
+                      <option value="Candidate">Candidate</option>
+                      <option value="Delegate">Delegate</option>
+                    </optgroup>
+
+                  </select>
+
+                </div>
+                <div className="col-md-12 mt-2">
+                  <label htmlFor="phone" className="form-label">Role Decriptions</label>
+                  <textarea className='form-control' rows="2" id="description" defaultValue="There is no description for now"></textarea>
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button type='reset' className="btn btn-danger btn-sm" onClick={resetInputFields}><i className='mdi mdi-delete-empty mr-1'></i>Clear</button>
+              <button className="btn btn-info btn-sm" id='btn-save' onClick={sendSaveRequest} disabled={isSaving}>
+                {isSaving ? <><i className="mdi mdi-atom-variant mdi-spin"></i> Sending...</> : <><i className="mdi mdi-account-convert mr-1"></i>Send Request</>}
+              </button>
+              <button className="btn btn-info btn-sm" id='btn-edit' onClick={sendEditRequest} disabled={isSaving}>
+                {isSaving ? <><i className="mdi mdi-atom-variant mdi-spin"></i> Sending...</> : <><i className="mdi mdi-account-convert mr-1"></i>Send Request</>}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </>
+  );
+};
+
+export default Roles;
+
+
+
+{/* <label className="custom-card-checkbox text-center" style={{ width: 250 }}>
+  <input type="checkbox" name="custom_option1" className="custom-checkbox-input" />
+  <div className="custom-card mb-1">
+      <div className="custom-icon-container mt-0">
+          <i className="mdi mdi-gift" />
+      </div>
+      <h5 className="custom-header">Title here</h5>
+      <p className="custom-description">GHS <strong className='text-monospace h3'>500</strong> /Monthly</p>
+      <small className="text-trunate">Short infomation</small>
+  </div>
+  <a href="#" className='text-center btn-more'><strong>View More Details</strong></a>
+</label> */}
