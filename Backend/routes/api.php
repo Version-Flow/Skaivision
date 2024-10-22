@@ -28,10 +28,11 @@ Route::prefix('v2')->group(function () {
     // End of free routes    =====================================================================================
 
 
-    // Route::middleware([CheckApiKey::class, 'auth:sanctum'])->group(function () {   
-    
+    // Route::middleware([CheckApiKey::class, 'auth:sanctum'])->group(function () {
+
         // Bulk Remove records
         Route::post('/universal/bulk-remove', [UniversalController::class, 'bulkRemove']);
+
 
         // Roles Route
         Route::post('/settings/roles/update', [SystemSettingsController::class, 'updateRole']);
@@ -39,11 +40,13 @@ Route::prefix('v2')->group(function () {
         Route::get('/settings/roles', [SystemSettingsController::class, 'viewRole']);
         Route::post('/settings/roles', [SystemSettingsController::class, 'createRole']);
 
+
         // Countries:
         Route::get('/settings/countries', [SystemSettingsController::class, 'viewCountry']);
         Route::post('/settings/countries', [SystemSettingsController::class, 'createCountry']);
         Route::post('/settings/countries/update', [SystemSettingsController::class, 'updateCountry']);
         Route::post('/settings/countries/delete', [SystemSettingsController::class, 'deleteCountry']);
+
 
         // Regions:
         Route::get('/settings/regions', [SystemSettingsController::class, 'viewRegion']);
@@ -52,12 +55,14 @@ Route::prefix('v2')->group(function () {
         Route::post('/settings/regions/delete', [SystemSettingsController::class, 'deleteRegion']);
         Route::get('/settings/regions/by-country', [SystemSettingsController::class, 'getRegionByCountry']);
 
+
         // Districts:
         Route::get('/settings/districts', [SystemSettingsController::class, 'viewDistrict']);
         Route::post('/settings/districts', [SystemSettingsController::class, 'createDistrict']);
         Route::post('/settings/districts/update', [SystemSettingsController::class, 'updateDistrict']);
         Route::post('/settings/districts/delete', [SystemSettingsController::class, 'deleteDistrict']);
         Route::get('/settings/districts/by-region', [SystemSettingsController::class, 'getDistrictByRegion']);
+
 
         // Permissions:
         Route::get('/settings/permissions', [SystemSettingsController::class, 'viewPermission']);
@@ -66,7 +71,7 @@ Route::prefix('v2')->group(function () {
         Route::post('/settings/permissions/delete', [SystemSettingsController::class, 'deletePermission']);
         Route::get('/settings/permissions/get', [SystemSettingsController::class, 'getPermission']);
 
-       
+
         // Ethnicity Routes
         Route::get('/settings/ethnicities', [SystemSettingsController::class, 'viewEthnicity']);
         Route::post('/settings/ethnicities', [SystemSettingsController::class, 'createEthnicity']);
@@ -74,17 +79,20 @@ Route::prefix('v2')->group(function () {
         Route::post('/settings/ethnicities/delete', [SystemSettingsController::class, 'deleteEthnicity']);
         Route::get('/settings/ethnicities/by-region', [SystemSettingsController::class, 'getEthnicityByRegion']);
 
+
         // Level Routes
         Route::get('/settings/levels', [SystemSettingsController::class, 'viewLevel']);
         Route::post('/settings/levels', [SystemSettingsController::class, 'createLevel']);
         Route::post('/settings/levels/update', [SystemSettingsController::class, 'updateLevel']);
         Route::post('/settings/levels/delete', [SystemSettingsController::class, 'deleteLevel']);
 
+
         // Relationship Routes
         Route::get('/settings/relationships', [SystemSettingsController::class, 'viewRelationship']);
         Route::post('/settings/relationships', [SystemSettingsController::class, 'createRelationship']);
         Route::post('/settings/relationships/update', [SystemSettingsController::class, 'updateRelationship']);
         Route::post('/settings/relationships/delete', [SystemSettingsController::class, 'deleteRelationship']);
+
 
         // School Status Routes
         Route::get('/settings/school-statuses', [SystemSettingsController::class, 'viewSchoolStatus']);
@@ -98,11 +106,13 @@ Route::prefix('v2')->group(function () {
         Route::post('/settings/school-types/update', [SystemSettingsController::class, 'updateSchoolType']);
         Route::post('/settings/school-types/delete', [SystemSettingsController::class, 'deleteSchoolType']);
 
+
         // Religion Routes
         Route::get('/settings/religions', [SystemSettingsController::class, 'viewReligion']);
         Route::post('/settings/religions', [SystemSettingsController::class, 'createReligion']);
         Route::post('/settings/religions/update', [SystemSettingsController::class, 'updateReligion']);
         Route::post('/settings/religions/delete', [SystemSettingsController::class, 'deleteReligion']);
+
 
         // Accreditation Body Routes
         Route::get('/settings/accreditation-bodies', [SystemSettingsController::class, 'viewAccreditationBody']);
@@ -117,9 +127,30 @@ Route::prefix('v2')->group(function () {
         Route::post('/settings/packages/update', [AppSettingsController::class, 'updatePackage']);
         Route::post('/settings/packages/delete', [AppSettingsController::class, 'deletePackage']);
 
-        
 
-       
+        //Institution Routes
+        Route::get('/settings/setup/institiution/create-account', [AccountController::class, 'createNewInstitution']);
+        Route::post('/settings/setup/institiution/set-account', [AccountController::class, 'setNewInstitution']);
+        Route::post('/settings/setup/institiution/mute-account', [AccountController::class, 'muteInstsitution']);
+        Route::post('/settings/setup/institiution/freeze-account', [AccountController::class, 'freezeInstitution']);
+
+
+        //Subscription Routes
+        Route::get('/settings/setup/subscription', [SubscriptionController::class, 'viewSubscription']);
+        Route::post('/settings/setup/subscription/create', [SubscriptionController::class, 'createSubscription']);
+        Route::post('/settings/setup/subscription/update', [SubscriptionController::class, 'updateSubscription']);
+        Route::post('/settings/setup/subscription/delete', [SubscriptionController::class, 'deleteSubscription']);
+
+
+        //Billing Routes
+        Route::get('/settings/setup/billing', [BillingController::class, 'viewBilling']);
+        Route::post('/settings/setup/billing/create', [BillingController::class, 'createBilling']);
+        Route::post('/settings/setup/billing/update', [BillingController::class, 'updateBilling']);
+        Route::post('/settings/setup/billing/delete', [BillingController::class, 'deleteBilling']);
+
+
+
+
    /*  }); */
 
 
