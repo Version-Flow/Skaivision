@@ -26,4 +26,12 @@ class Country extends Model
     {
         return $this->hasMany(Region::class);
     }
+
+    public function institutions(){
+        return $this->hasMany(Institution::class);
+    }
+
+    // public function country(){
+    //     return $this->belongsTo(Country::class);
+    // }
 }

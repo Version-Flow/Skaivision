@@ -35,4 +35,9 @@ class Region extends Model
     {
         return $this->hasMany(District::class);
     }
+
+    public function institutions()
+    {
+        return $this->belongsTo(Institution::class);
+    }
 }

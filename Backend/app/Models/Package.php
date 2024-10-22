@@ -24,4 +24,12 @@ class Package extends Model
         'is_deleted',
         'updated_at',
     ];
+
+        public function institutions(){
+        return $this->belongsToMany(Institution::class);
+    }
+        // public function packages(){
+    //     return $this->belongsToMany(Package::class);
+    // }
+
 }

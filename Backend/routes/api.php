@@ -20,8 +20,8 @@ Route::prefix('v2')->group(function () {
     // Free and Open Routes   ===================================================================================
 
     // Authentication
-    Route::get('/authentication/login', [AuthenticationController::class, 'getCrendential']);
     Route::post('/authentication/sessions', [AuthenticationController::class, 'createSessions']);
+    Route::get('/authentication/login', [AuthenticationController::class, 'getCrendential']);
     Route::post('/authentication/logout', [AuthenticationController::class, 'logout']);
 
     // Route::post('/settings/roles', [SystemSettingsController::class, 'createRole'])->middleware([SanitizeRequest::class]);

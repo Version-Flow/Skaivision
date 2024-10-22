@@ -20,4 +20,12 @@ class AccreditationBody extends Model
         'is_deleted',
         'updated_at',
     ];
+
+    public function institutions(){
+        return $this->belongsToMany(Institution::class);    
+    }
+    
+    // public function accreditationsBodies(){
+    //     return $this->belongsToMany(AccreditationsBody::class);
+    // }
 }
