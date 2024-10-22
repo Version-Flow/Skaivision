@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('package_id')->constrained()->nullable()->onDelete('cascade');
             $table->date('next_payment');
             $table->date('current_payment')->nullable();
-            $table->string('billing_id')->nullable();
+            $table->foreignId('billing_id')->constrained()->nullable()->onDelete('cascade');
             $table->string('payment_type')->nullable();
             $table->timestamps();
         });

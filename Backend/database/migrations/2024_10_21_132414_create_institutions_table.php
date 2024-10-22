@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('country_id', 100)->constrained()->nullable()->onDelete('cascade');
             $table->foreignId('region_id', 100)->constrained()->nullable()->onDelete('cascade');
             $table->foreignId('district_id', 100)->constrained()->nullable()->onDelete('cascade');
-            $table->strimg('town', 100);
+            $table->string('town', 100);
             $table->string('gps_adress', 15);
             $table->string('mobile', 10)->unique();
             $table->string('phone', 20)->unique();
@@ -46,8 +46,8 @@ return new class extends Migration
             $table->string('students_age_range', 10);
             $table->string('total_teachng_staff', 15);
             $table->string('total_non_teating_staff', 15);
-            $table->boolean('t&c_agreement')->default('True');
-            $table->boolean('contract_agreement')->default('True');
+            $table->boolean('t&c_agreement')->default(true);
+            $table->boolean('contract_agreement')->default(true);
             $table->foreignId('package_id')->constrained()->nullable()->onDelete('cascade');
             $table->string('status', 15)->default('Active');
             $table->string('is_deleted', 3)->default('No');

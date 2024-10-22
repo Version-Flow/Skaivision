@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id')->startingValue(25000);
+             $table->foreignId('institution_id')->constrained()->nullable()->onDelete('cascade');
+             $table->foreignId('subscription_id')->constrained()->nullable()->onDelete('cascade');
+            $table->decimal('total_amount', 7, 2);
+            $table->string('status', 15)->default('Active');
+            $table->string('is_deleted', 3)->default('No');
             $table->timestamps();
         });
     }
