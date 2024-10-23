@@ -16,7 +16,7 @@ class AccountController extends Controller
             'region_id' => 'required|string|max:150',
             'district_id' => 'required|string|max:150',
             'town' => 'required|string|max:100',
-            'gps_adress' => 'required|string|max:15', // more specific GPS format
+            'gps_address' => 'required|string|max:15',
             
             'mobile' => 'required|string|size:10|regex:/^\d{10}$/',
             'phone' => 'nullable|string|max:20|regex:/^[0-9\-\(\)\/\+\s]*$/',
@@ -44,14 +44,15 @@ class AccountController extends Controller
             'accreditation_status_id' => 'required|string|max:20',
             'accreditation_body_id' => 'required|string|max:150',
             
-            'legal_documents.*' => 'required|mimes:pdf,doc,docx|max:5120',
-            
+            'legal_documents' => 'required|array|size:3',
+            'legal_documents.*' => 'mimes:pdf,doc,docx|max:5120',
+
             'tin' => 'nullable|string|max:18',
             
             'total_students' => 'required|integer|min:1|max:99999',
             'students_age_range' => 'required|string|max:10',
-            'total_teachng_staff' => 'required|string',
-            'total_non_teating_staff' => 'required|integer|min:1|max:999',
+            'total_teaching_staff' => 'required|string',
+            'total_non_teaching_staff' => 'required|integer|min:1|max:999',
             
             't&c_agreement' => 'required|boolean',
             'contract_agreement' => 'required|boolean',
@@ -62,22 +63,24 @@ class AccountController extends Controller
             'is_deleted' => 'nullable|string|in:Yes,No|max:3',
         ]);
         
-        $imagePath = request('logo')->store('uploads', 'public');
-        $legalDocumentsPath = request('logo')->store('uploads', 'public');
+            $imagePath = request('logo') ? request('logo')->store('uploads', 'public') : null;
         
-        // $legalDocuments = [];
-        // foreach($request->file('legal_documents') as $legalDocumentFile){
-        //     $legalDocuments[] = $legalDocumentFile->store('uploads', 'public');
-        // }
-
-        $redirectData = $request->except(['image', 'legal_documents']);
-        $redirectData['logo'] = $imagePath;
-        $redirectData['legal_documents'] = $legalDocumentsPath;
-
-        $institution = Institution::create($redirectData);
-        return response()->json([
-            'message' => 'Record created successfully',
-            'data' => $institution,
-        ], 201);
+            $legalDocumentsPaths = [];
+            foreach($request->file('legal_documents') as $legalDocumentFile){
+                $legalDocumentsPaths[] = $legalDocumentFile->store('uploads', 'public');
+            }
+        
+            $redirectData = $request->except(['logo', 'legal_documents']);
+            $redirectData['logo'] = $imagePath;
+            $redirectData['legal_documents'] = json_encode($legalDocumentsPaths);
+        
+            $institution = Institution::create($redirectData);
+            
+            return response()->json([
+                'message' => 'Record created successfully',
+                'data' => $institution,
+            ], 201);
+        }
+        
     }
-}
+
