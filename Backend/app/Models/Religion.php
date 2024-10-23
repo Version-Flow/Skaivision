@@ -20,5 +20,4 @@ class Religion extends Model
         'is_deleted',
         'updated_at',
     ];
-
 }

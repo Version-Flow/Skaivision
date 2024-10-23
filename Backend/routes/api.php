@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Middleware\CheckApiKey;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\SanitizeRequest;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\UniversalController;
 use App\Http\Controllers\AppSettingsController;
 use App\Http\Controllers\AuthenticationController;
@@ -66,7 +67,6 @@ Route::prefix('v2')->group(function () {
         Route::post('/settings/permissions/delete', [SystemSettingsController::class, 'deletePermission']);
         Route::get('/settings/permissions/get', [SystemSettingsController::class, 'getPermission']);
 
-       
         // Ethnicity Routes
         Route::get('/settings/ethnicities', [SystemSettingsController::class, 'viewEthnicity']);
         Route::post('/settings/ethnicities', [SystemSettingsController::class, 'createEthnicity']);
@@ -117,9 +117,39 @@ Route::prefix('v2')->group(function () {
         Route::post('/settings/packages/update', [AppSettingsController::class, 'updatePackage']);
         Route::post('/settings/packages/delete', [AppSettingsController::class, 'deletePackage']);
 
-        
 
-       
+        //Institution Routes
+        Route::get('/settings/setup/institiution', [AccountController::class, 'viewInstitution']);
+        Route::post('/settings/setup/institiution/create-account', [AccountController::class, 'createNewInstitution']);
+        Route::post('/settings/setup/institiution/set-account', [AccountController::class, 'setNewInstitution']);
+        Route::post('/settings/setup/institiution/mute-account', [AccountController::class, 'muteInstsitution']);
+        Route::post('/settings/setup/institiution/freeze-account', [AccountController::class, 'freezeInstitution']);
+
+
+        //Subscription Routes
+        Route::get('/payment/account/subscription', [SubscriptionController::class, 'viewSubscription']);
+        Route::post('/payment/account/subscription/create', [SubscriptionController::class, 'subscriptionPayment']);
+        Route::post('/payment/account/subscription/update', [SubscriptionController::class, 'updateSubscription']);
+        Route::post('/payment/account/subscription/delete', [SubscriptionController::class, 'renewalPayment']);
+
+
+        //Billing Routes
+        Route::get('/settings/setup/billing', [BillingController::class, 'viewBilling']);
+        Route::post('/settings/setup/billing/create', [BillingController::class, 'createBilling']);
+        Route::post('/settings/setup/billing/update', [BillingController::class, 'updateBilling']);
+        Route::post('/settings/setup/billing/delete', [BillingController::class, 'deleteBilling']);
+
+
+        //Payment Routes
+        Route::post('/payment/account/billing', [PaymentController::class, 'viewPayment']);
+        Route::get('/payment/account/subscription-payment', [PaymentController::class, 'sunscriptionPayment']);
+        Route::post('/payment/account/subscription-checkout', [PaymentController::class, 'subscriptionCheckout']);
+        Route::post('/payment/account/renewal-payment', [PaymentController::class, 'renewalPayment']);
+        Route::post('/payment/account/renewal-checkout', [PaymentController::class, 'renewalCheckout']);
+
+
+
+
    /*  }); */
 
 

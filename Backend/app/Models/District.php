@@ -25,14 +25,4 @@ class District extends Model
     {
         return $this->belongsTo(Region::class);
     }
-
-    public function institutions()
-    {
-        return $this->hasMany(Institution::class);
-    }
-
-    // public function districts()
-    // {
-    //     return $this->belongsTo(District::class);
-    // }
 }
