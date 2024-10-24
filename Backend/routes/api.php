@@ -5,6 +5,7 @@ use App\Http\Middleware\CheckApiKey;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\SanitizeRequest;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UniversalController;
 use App\Http\Controllers\AppSettingsController;
 use App\Http\Controllers\AuthenticationController;
@@ -121,9 +122,9 @@ Route::prefix('v2')->group(function () {
         //Institution Routes
         Route::get('/settings/setup/institiution', [AccountController::class, 'viewInstitution']);
         Route::post('/settings/setup/institiution/create-account', [AccountController::class, 'createNewInstitution']);
-        Route::post('/settings/setup/institiution/set-account', [AccountController::class, 'setNewInstitution']);
-        Route::post('/settings/setup/institiution/mute-account', [AccountController::class, 'muteInstsitution']);
-        Route::post('/settings/setup/institiution/freeze-account', [AccountController::class, 'freezeInstitution']);
+        Route::put('/settings/setup/institiution/{id}/set-account', [AccountController::class, 'setNewInstitution']);
+        Route::post('/settings/setup/institiution/{id}/mute-account', [AccountController::class, 'muteInstsitution']);
+        Route::post('/settings/setup/institiution/{id}/freeze-account', [AccountController::class, 'freezeInstitution']);
 
 
         //Subscription Routes
@@ -149,6 +150,16 @@ Route::prefix('v2')->group(function () {
 
 
 
+        Route::post('/payment/account/subscription-init', [PaymentController::class, 'subscriptionPaymentInit']);
+        Route::post('/payment/account/subscription', [PaymentController::class, 'subscriptionPayment']);
+        Route::post('/payment/account/subscription-checkout', [PaymentController::class, 'subscriptionCheckout']);
+        Route::post('/payment/account/renewal-init', [PaymentController::class, 'renewalPaymentInit']);
+        Route::post('/payment/account/renewal', [PaymentController::class, 'renewalPayment']);
+        Route::post('/payment/account/renewal-checkout', [PaymentController::class, 'renewalCheckout']);
+
+        // Routes for when Paystack redirects after a successful/failed payment
+        Route::get('/payment/callback', [PaymentController::class, 'subscriptionPayment']);
+        Route::get('/payment/renewal-callback', [PaymentController::class, 'renewalPayment']);
 
    /*  }); */
 

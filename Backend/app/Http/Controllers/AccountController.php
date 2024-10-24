@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AccountController extends Controller
 {
     public function createNewInstitution(Request $request){
-        $validated_fields = $request->validate([
+        $request->validate([
             'school_name' => 'required|string|max:150',
             'school_aliase' => 'nullable|string|max:30',
             'school_type_id' => 'required|string|max:150',
@@ -81,6 +81,82 @@ class AccountController extends Controller
                 'data' => $institution,
             ], 201);
         }
+
+
+
+        //**************************setNewAccount**************************
+
+    public function setNewInstitution(Request $request, int $id){        
+        $request->validate([
+            'school_name' => 'required|string|max:150',
+            'school_aliase' => 'nullable|string|max:30',
+            'school_type_id' => 'required|exists:school_types,id',
+            'country_id' => 'required|exists:countries,id',
+            'region_id' => 'required|exists:regions,id',
+            'district_id' => 'required|exists:districts,id',
+            'town' => 'required|string|max:100',
+            'gps_address' => 'required|string|max:15',
+            'mobile' => 'required|string|size:10|regex:/^\d{10}$/',
+            'phone' => 'nullable|string|max:20|regex:/^[0-9\-\(\)\/\+\s]*$/',
+            'email' => 'required|email|max:50|unique:institutions',
+            'website_url' => 'nullable|url|max:180|unique:institutions',
+            'logo' => 'nullable|file|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'school_slogan' => 'nullable|string|max:100',
+            'date_started' => 'required|date|before_or_equal:today',
+            'founder_name' => 'required|string|max:100',
+            'school_status_id' => 'required|exists:school_statuses,id',
+            'mission_statement' => 'required|string',
+            'vision_statement' => 'required|string',
+            'principal_name' => 'required|string|max:100',
+            'principal_phone_number' => 'required|string|size:10|regex:/^\d{10}$/',
+            'principal_email' => 'required|email|max:50|unique:institutions',
+            'admin_name' => 'required|string|max:100',
+            'admin_phone_number' => 'required|string|size:10|regex:/^\d{10}$/',
+            'admin_email' => 'required|email|max:50|unique:institutions',
+            'accreditation_status_id' => 'required|string|max:20',
+            'accreditation_body_id' => 'required|exists:accreditation_bodies,id',
+            'legal_documents' => 'required|array|size:3',
+            'legal_documents.*' => 'mimes:pdf,doc,docx|max:5120',
+            'tin' => 'nullable|string|max:18',
+            'total_students' => 'required|integer|min:1|max:99999',
+            'students_age_range' => 'required|string|max:10',
+            'total_teaching_staff' => 'required|integer|min:1|max:999',
+            'total_non_teaching_staff' => 'required|integer|min:1|max:999',
+            't&c_agreement' => 'required|boolean',
+            'contract_agreement' => 'required|boolean',
+            'package_id' => 'required|exists:packages,id',
+            'status' => 'nullable|string|in:Active,Inactive,Suspended|max:15',
+            'is_deleted' => 'nullable|string|in:Yes,No|max:3',
+        ]);
         
+    
+        // Handle file uploads if present
+        if ($request->hasFile('logo')) {
+            $validated_fields['logo'] = $request->file('logo')->store('uploads', 'public');
+        }
+    
+        if ($request->hasFile('legal_documents')) {
+            $legalDocumentsPaths = [];
+            foreach ($request->file('legal_documents') as $legalDocumentFile) {
+                $legalDocumentsPaths[] = $legalDocumentFile->store('uploads', 'public');
+            }
+            $validated_fields['legal_documents'] = json_encode($legalDocumentsPaths);
+        }
+
+        $institution = Institution::findOrFail($id);
+    
+        try {
+            $institution->update($validated_fields);
+            return response()->json([
+                'message' => 'Institution updated successfully',
+                'data' => $institution,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error occurred: ' . $e->getMessage(),
+            ], 500);
+        }
+            
     }
+}
 
